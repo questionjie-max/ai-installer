@@ -4,3 +4,4 @@ cache/
 .DS_Store
 *.log
 scripts/screenshot.js
+AI-Installer.app
