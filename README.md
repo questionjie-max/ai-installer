@@ -45,6 +45,20 @@
 <div align="center">
 </div>
 
+<div align="center">
+  <br>
+  <table>
+  <tr>
+    <td align="center">
+      <strong>✅ Result: Tools Installed & Running</strong><br>
+      <em>DeepSeek TUI successfully installed and running in terminal</em><br><br>
+      <img src="docs/screenshots/ss-result.png" width="90%" alt="Installation Result" style="border-radius: 8px; max-width: 700px;">
+    </td>
+  </tr>
+  </table>
+  <br>
+</div>
+
 ---
 
 ## 📖 Overview

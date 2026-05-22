@@ -44,6 +44,20 @@
 <div align="center">
 </div>
 
+<div align="center">
+  <br>
+  <table>
+  <tr>
+    <td align="center">
+      <strong>✅ 效果展示：装完直接用</strong><br>
+      <em>DeepSeek TUI 安装完成，终端直接运行</em><br><br>
+      <img src="docs/screenshots/ss-result.png" width="90%" alt="安装成果" style="border-radius: 8px; max-width: 700px;">
+    </td>
+  </tr>
+  </table>
+  <br>
+</div>
+
 ---
 
 ## 📖 简介
