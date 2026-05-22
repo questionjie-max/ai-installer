@@ -1,4 +1,4 @@
-name: Build Installer
+name: Build & Release
 
 on:
   push:
@@ -33,3 +33,33 @@ jobs:
         with:
           name: AI-Installer-win
           path: dist/AI-Installer-*.exe
+
+  release:
+    needs: [build-mac, build-win]
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/download-artifact@v4
+      - name: Create Release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: v1.0.0
+          name: AI Tool Installer v1.0.0
+          body: |
+            ## 🔧 AI Tool Installer v1.0.0
+
+            ### 🖥️ macOS
+            Download `AI-Installer-mac.zip` → 解压后双击 `AI-Installer.app`
+
+            ### 🪟 Windows
+            Download `AI-Installer-win.zip` → 解压后双击 `AI-Installer Setup *.exe`
+
+            ### ✨ 支持安装的产品
+            Claude Code · Codex CLI · OpenCode · DeepSeek TUI · Kimi Code · Qoder CLI  
+            OpenClaw · Hermes Agent · Cursor · Windsurf · Trae · Qoder Desktop · VS Code · CC Switch
+          generate_release_notes: false
+          make_latest: true
+          files: |
+            AI-Installer-mac/*.dmg
+            AI-Installer-win/*.exe
