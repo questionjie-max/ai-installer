@@ -36,7 +36,7 @@ AI 工具安装助手是一个桌面应用，帮助开发者快速配置 AI 编�
 
 打开应用后看到欢迎页，点击 **"开始使用 →"** 进入下一步。
 
-![欢迎页](screenshots/welcome.png)
+![欢迎页](screenshots/ss-welcome.png)
 
 ### 第二步：选择工具
 
@@ -47,7 +47,7 @@ AI 工具安装助手是一个桌面应用，帮助开发者快速配置 AI 编�
 
 勾选你想安装的工具，可以一次选多个。
 
-![选择产品](screenshots/select-products.png)
+![选择产品](screenshots/ss-select.png)
 
 > **提示**：依赖不满足的工具（如需要 Node.js）也可以勾选——安装器会自动先补齐缺少的依赖。
 
@@ -65,7 +65,7 @@ AI 工具安装助手是一个桌面应用，帮助开发者快速配置 AI 编�
 - ✅/❌ **依赖检测** — 已安装和缺少的依赖
 - 📋 **安装评估** — 各工具是否可安装
 
-![环境检测](screenshots/detect-result.png)
+![环境检测](screenshots/ss-detect.png)
 
 ### 第四步：一键安装
 

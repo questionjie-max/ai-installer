@@ -36,7 +36,7 @@ AI Tool Installer is a desktop application that helps developers quickly set up 
 
 When you first open the app, you'll see the welcome screen with a brief introduction. Click **"开始使用 →"** (Get Started) to begin.
 
-![Welcome](screenshots/welcome.png)
+![Welcome](screenshots/ss-welcome.png)
 
 ### Step 2: Select Tools
 
@@ -47,7 +47,7 @@ Browse the product catalog organized by category:
 
 Check the boxes next to the tools you want to install. You can select multiple tools at once.
 
-![Select Products](screenshots/select-products.png)
+![Select Products](screenshots/ss-select.png)
 
 > **Tip**: Tools with unmet dependencies (e.g., requiring Node.js) can still be selected — the installer will automatically install the required dependencies first.
 
@@ -65,7 +65,7 @@ The results screen shows:
 - ✅/❌ **Dependency checks** — What's installed and what's missing
 - 📋 **Installation assessment** — Which tools are ready
 
-![Environment Detection](screenshots/detect-result.png)
+![Environment Detection](screenshots/ss-detect.png)
 
 ### Step 4: Installation
 

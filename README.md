@@ -12,9 +12,10 @@
     <a href="https://github.com/questionjie-max/ai-installer/issues"><img src="https://img.shields.io/github/issues/questionjie-max/ai-installer?style=flat-square" alt="Issues"></a>
   </p>
   <p>
-    <img src="docs/screenshots/welcome.png" width="280" alt="Welcome Screen">
-    <img src="docs/screenshots/select-products.png" width="280" alt="Product Selection">
-    <img src="docs/screenshots/detect-result.png" width="280" alt="Environment Detection">
+    <img src="docs/screenshots/ss-welcome.png" width="280" alt="Welcome Screen">
+    <img src="docs/screenshots/ss-select.png" width="280" alt="Product Selection">
+    <img src="docs/screenshots/ss-detect.png" width="225" alt="Environment Detection">
+    <img src="docs/screenshots/ss-install.png" width="225" alt="Installation">
   </p>
 </div>
 

@@ -11,9 +11,10 @@
     <a href="LICENSE"><img src="https://img.shields.io/github/license/questionjie-max/ai-installer?style=flat-square" alt="许可证"></a>
   </p>
   <p>
-    <img src="docs/screenshots/welcome.png" width="280" alt="欢迎页">
-    <img src="docs/screenshots/select-products.png" width="280" alt="选择产品">
-    <img src="docs/screenshots/detect-result.png" width="280" alt="环境检测">
+    <img src="docs/screenshots/ss-welcome.png" width="280" alt="欢迎页">
+    <img src="docs/screenshots/ss-select.png" width="280" alt="选择产品">
+    <img src="docs/screenshots/ss-detect.png" width="225" alt="环境检测">
+    <img src="docs/screenshots/ss-install.png" width="225" alt="安装中">
   </p>
 </div>
 
