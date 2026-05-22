@@ -5,3 +5,4 @@ cache/
 *.log
 scripts/screenshot.js
 AI-Installer.app
+# auto-trigger build
