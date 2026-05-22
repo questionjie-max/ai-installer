@@ -126,17 +126,15 @@
 
 ## 🚀 快速开始
 
-### 系统要求
-- **macOS**: 12.0+（Apple Silicon 或 Intel）
-- **Windows**: Windows 10+（x64）
-
-### macOS 用户
+### 🖥️ macOS 用户
 项目根目录的 **`AI-Installer.app`** 双击即可运行。
 
-### Windows 用户
-双击项目文件夹里的 **`start.bat`**，脚本会自动安装依赖并启动。
+### 🪟 Windows 用户
+**方法一（推荐）：** 去 [Releases 页面](https://github.com/questionjie-max/ai-installer/releases) 下载 `.exe` 安装包，双击安装，跟装微信一样简单。
 
-或者在终端手动运行：
+**方法二：** 双击项目里的 **`start.bat`**，脚本会自动安装依赖并启动。
+
+**方法三（开发者）：** 打开终端运行：
 ```bash
 git clone https://github.com/questionjie-max/ai-installer.git
 cd ai-installer

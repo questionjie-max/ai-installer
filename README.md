@@ -128,25 +128,15 @@ Desktop applications with built-in AI capabilities.
 
 ## 🚀 Quick Start
 
-### Prerequisites
-- **macOS**: 12.0+ (Apple Silicon or Intel) — download `AI-Installer.app`
-- **Windows**: Windows 10+ (x64) — run from source or download from Releases
+### 🖥️ macOS 用户
+项目根目录 **`AI-Installer.app`** 双击即可运行。
 
-### Download (macOS)
-The app is in the project root folder: **`AI-Installer.app`** — double-click to run.
+### 🪟 Windows 用户
+**方法一（推荐）：** 去 [Releases 页面](https://github.com/questionjie-max/ai-installer/releases) 下载最新版 `.exe` 安装包，双击安装。
 
-### Windows: Quick Start
-Double-click **`start.bat`** in the project folder — it will auto-install dependencies and launch the app.
+**方法二：** 双击项目里的 **`start.bat`**，会自动安装依赖并启动。
 
-Or run manually in terminal:
-```bash
-git clone https://github.com/questionjie-max/ai-installer.git
-cd ai-installer
-npm install
-npm start
-```
-
-### macOS: Run from source (alternative)
+**方法三：** 打开终端运行：
 ```bash
 git clone https://github.com/questionjie-max/ai-installer.git
 cd ai-installer
