@@ -5,7 +5,7 @@
   "main": "main.js",
   "scripts": {
     "start": "electron .",
-    "build:mac": "electron-builder --mac --arm64",
+    "build:mac": "electron-builder --mac --x64",
     "build:win": "electron-builder --win --x64"
   },
   "build": {
@@ -16,10 +16,12 @@
     },
     "mac": {
       "target": [
-        "dmg"
+        "dmg",
+        "zip"
       ],
       "artifactName": "AI-Installer-${version}-mac-${arch}.${ext}",
-      "identity": null
+      "identity": null,
+      "asarUnpack": []
     },
     "win": {
       "target": [
@@ -43,7 +45,8 @@
     ],
     "extraMetadata": {
       "main": "main.js"
-    }
+    },
+    "extraResources": []
   },
   "keywords": [
     "AI",
