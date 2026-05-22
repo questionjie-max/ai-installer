@@ -5,6 +5,7 @@ const os = require('os');
 const https = require('https');
 const { getPlatform, getPlatformType } = require('./detector');
 const { getDependency, getProductById } = require('./products');
+const logger = require('./logger');
 
 let onProgress = null;
 let networkStatus = 'direct';
@@ -29,6 +30,24 @@ function execAsync(cmd, timeout = 180000) {
       }
     });
   });
+}
+
+/**
+ * Retry wrapper: retries an async function up to `maxRetries` times
+ * with exponential backoff (1s, 3s, 7s).
+ */
+async function withRetry(fn, label, maxRetries = 3) {
+  for (let attempt = 1; attempt <= maxRetries; attempt++) {
+    try {
+      logger.info('installer', `[${label}] attempt ${attempt}/${maxRetries}`);
+      return await fn();
+    } catch (err) {
+      logger.warn('installer', `[${label}] attempt ${attempt} failed: ${err.message}`);
+      if (attempt >= maxRetries) throw err;
+      const delay = Math.min(1000 * Math.pow(3, attempt - 1), 10000);
+      await new Promise(r => setTimeout(r, delay));
+    }
+  }
 }
 
 function downloadFile(url, dest) {
@@ -59,10 +78,39 @@ function downloadFile(url, dest) {
   });
 }
 
+/**
+ * Post-install verification: checks if a command is available in PATH.
+ */
+function verifyInstall(cmdName) {
+  try {
+    const out = execSync(`which ${cmdName} 2>/dev/null || where ${cmdName} 2>/dev/null`, {
+      timeout: 5000, encoding: 'utf-8', stdio: ['pipe', 'pipe', 'pipe']
+    });
+    const verified = out.trim();
+    if (verified) {
+      logger.info('verify', `${cmdName} verified at: ${verified}`);
+      return verified;
+    }
+  } catch {
+    // Try npx fallback
+    try {
+      const out2 = execSync(`npx ${cmdName} --version 2>/dev/null`, {
+        timeout: 5000, encoding: 'utf-8', stdio: ['pipe', 'pipe', 'pipe']
+      });
+      if (out2.trim()) {
+        logger.info('verify', `${cmdName} verified via npx: v${out2.trim()}`);
+        return `npx ${cmdName}`;
+      }
+    } catch {}
+  }
+  logger.warn('verify', `${cmdName} not found in PATH after install`);
+  return null;
+}
+
 // Symlink npm binaries to ~/.local/bin (always writable and in PATH)
 function linkBin(cmdName) {
   try {
-    execSync(`which ${cmdName}`, { stdio: 'pipe', timeout: 3000 });
+    execSync(`which ${cmdName} 2>/dev/null || where ${cmdName} 2>/dev/null`, { stdio: 'pipe', timeout: 3000 });
     return; // Already accessible
   } catch {}
 
@@ -70,7 +118,6 @@ function linkBin(cmdName) {
   const npmBin = path.join(npmRoot, '..', 'bin');
   const localBin = path.join(os.homedir(), '.local', 'bin');
 
-  // Ensure ~/.local/bin exists
   if (!fs.existsSync(localBin)) fs.mkdirSync(localBin, { recursive: true });
 
   try {
@@ -81,33 +128,51 @@ function linkBin(cmdName) {
         const dst = path.join(localBin, file);
         if (!fs.existsSync(dst)) {
           fs.symlinkSync(src, dst);
+          logger.info('linkBin', `symlinked ${src} -> ${dst}`);
         }
         return;
       }
     }
-  } catch {}
+  } catch (e) {
+    logger.warn('linkBin', `failed to link ${cmdName}: ${e.message}`);
+  }
 }
 
 async function installNpm(pkg) {
   const reg = networkStatus === 'mirror' ? ' --registry https://registry.npmmirror.com' : '';
-  await execAsync(`npm install -g ${pkg}${reg}`);
+  return withRetry(
+    () => execAsync(`npm install -g ${pkg}${reg}`),
+    `npm:${pkg}`,
+    3
+  );
 }
 
 async function installProduct(product) {
-  const { id, name, installType } = product;
+  const { id, name, installType, mainCmd } = product;
   if (!onProgress) return false;
   onProgress._lastId = id;
+
+  logger.info('installer', `Starting install: ${name} (${id}) type=${installType}`);
 
   if (installType === 'npm') {
     emit(id, 'installing', 10, '正在安装...');
     try {
       await installNpm(product.packageName);
       // Link binaries to PATH
-      const cmds = [id, product.mainCmd].filter(Boolean);
+      const cmds = [id, mainCmd].filter(Boolean);
       for (const c of cmds) linkBin(c);
-      emit(id, 'completed', 100, '✅ 安装完成');
+
+      // Verify installation
+      const verified = verifyInstall(id) || verifyInstall(mainCmd);
+      if (verified) {
+        logger.info('installer', `${name} installed successfully at ${verified}`);
+        emit(id, 'completed', 100, `✅ 安装完成 (${verified})`);
+      } else {
+        emit(id, 'completed', 100, '✅ 安装完成（可能需要重启终端）');
+      }
       return true;
     } catch (e) {
+      logger.error('installer', `${name} install failed: ${e.message}`);
       emit(id, 'failed', 0, `❌ ${e.message}`);
       return false;
     }
@@ -116,10 +181,16 @@ async function installProduct(product) {
   if (installType === 'script') {
     emit(id, 'installing', 20, '正在安装...');
     try {
-      await execAsync(product.installScript, 300000);
+      await withRetry(
+        () => execAsync(product.installScript, 300000),
+        `script:${id}`,
+        2
+      );
+      logger.info('installer', `${name} script install completed`);
       emit(id, 'completed', 100, '✅ 安装完成');
       return true;
     } catch (e) {
+      logger.error('installer', `${name} script install failed: ${e.message}`);
       emit(id, 'failed', 0, `❌ ${e.message}`);
       return false;
     }
@@ -128,31 +199,29 @@ async function installProduct(product) {
   if (installType === 'download') {
     const plat = getPlatform();
     const url = product.downloadUrls?.[plat] || product.downloadUrl;
-    if (!url) { emit(id, 'failed', 0, '❌ 无下载链接'); return false; }
-
-    if (id === 'cursor' || id === 'vscode') {
-      const tmp = path.join(os.tmpdir(), url.split('/').pop() || `${id}.dmg`);
-      try {
-        emit(id, 'downloading', 10, '正在下载...');
-        await downloadFile(url, tmp);
-        emit(id, 'installing', 85, '下载完成，正在打开安装器...');
-        execSync(`open "${tmp}"`, { timeout: 5000 });
-        emit(id, 'completed', 100, '✅ 已下载，请在 Finder 中完成安装');
-        return true;
-      } catch (e) {
-        emit(id, 'failed', 0, `❌ 下载失败: ${e.message}`);
-        return false;
-      }
+    if (!url) {
+      logger.warn('installer', `${name} no download URL for platform ${plat}`);
+      emit(id, 'failed', 0, '❌ 无下载链接');
+      return false;
     }
+
+    const ext = os.platform() === 'darwin' ? '.dmg' : '.exe';
+    const tmp = path.join(os.tmpdir(), url.split('/').pop() || `${id}${ext}`);
 
     try {
       emit(id, 'downloading', 10, '正在下载...');
-      const tmp = path.join(os.tmpdir(), `${id}.dmg`);
-      await downloadFile(url, tmp);
-      execSync(`open "${tmp}"`, { timeout: 5000 });
-      emit(id, 'completed', 100, '✅ 已下载');
+      await withRetry(
+        () => downloadFile(url, tmp),
+        `download:${id}`,
+        3
+      );
+      emit(id, 'installing', 85, '下载完成，正在打开安装器...');
+      execSync(`${os.platform() === 'darwin' ? 'open' : 'start'} "${tmp}"`, { timeout: 5000 });
+      logger.info('installer', `${name} download opened: ${tmp}`);
+      emit(id, 'completed', 100, '✅ 已下载，请完成安装向导');
       return true;
-    } catch {
+    } catch (e) {
+      logger.warn('installer', `${name} download failed, opening website: ${e.message}`);
       emit(id, 'installing', 50, '打开官网下载页...');
       execSync(`open "${product.websiteUrl || url}"`, { timeout: 5000 });
       emit(id, 'completed', 100, '🔗 已打开官网下载页');
@@ -160,6 +229,7 @@ async function installProduct(product) {
     }
   }
 
+  logger.error('installer', `${name} unsupported install type: ${installType}`);
   emit(id, 'failed', 0, '❌ 不支持的安装类型');
   return false;
 }
@@ -168,14 +238,21 @@ async function startInstallation(productIds, netStatus) {
   networkStatus = netStatus;
   const completed = [], failed = [];
 
+  logger.info('installer', `Starting batch install: ${productIds.join(', ')} (network: ${netStatus})`);
+
   for (const id of productIds) {
     const product = getProductById(id);
-    if (!product) { failed.push(id); continue; }
+    if (!product) {
+      logger.warn('installer', `Product not found: ${id}`);
+      failed.push(id);
+      continue;
+    }
     const ok = await installProduct(product);
     if (ok) completed.push(id);
     else failed.push(id);
   }
 
+  logger.info('installer', `Batch install complete. Completed: ${completed.length}, Failed: ${failed.length}`);
   return { completed, failed, skipped: [] };
 }
 

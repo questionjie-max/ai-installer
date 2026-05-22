@@ -70,8 +70,26 @@
       <div class="total-progress-bar"><div class="total-progress-fill" id="total-progress-fill"></div></div>
       <div class="total-progress-text" id="total-progress-text">准备安装...</div>
       <div id="install-items"></div>
+      <div class="log-section" id="log-section" style="display:none">
+        <button class="btn-link" onclick="app.viewLogs()">📋 查看安装日志</button>
+      </div>
     </div>
     <div class="bottom-bar" id="install-bottom" style="display:none">
+      <button class="btn-primary" onclick="app.goToWelcome()">完成</button>
+    </div>
+  </div>
+
+  <!-- Page 5: Log Viewer -->
+  <div id="page-logs" class="page">
+    <div class="page-header">
+      <button class="btn-back" onclick="app.show('page-install')">← 返回</button>
+      <span class="page-step">安装日志</span>
+    </div>
+    <div class="logs-content">
+      <pre id="log-output" class="log-output">加载中...</pre>
+    </div>
+    <div class="bottom-bar">
+      <button class="btn-secondary" onclick="app.refreshLogs()">🔄 刷新</button>
       <button class="btn-primary" onclick="app.goToWelcome()">完成</button>
     </div>
   </div>

@@ -1,8 +1,26 @@
+# Dependencies
 node_modules/
+
+# Build output
 dist/
 cache/
+out/
+
+# OS files
 .DS_Store
+Thumbs.db
+Desktop.ini
+
+# Logs
 *.log
+npm-debug.log*
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Dev scripts
 scripts/screenshot.js
 AI-Installer.app
-# auto-trigger build

@@ -92,6 +92,7 @@ const app = {
     const ids = Array.from(this.selected);
     const container = document.getElementById('install-items');
     container.innerHTML = '';
+    document.getElementById('log-section').style.display = 'none';
 
     for (const id of ids) {
       let nm = id;
@@ -110,6 +111,24 @@ const app = {
     document.getElementById('install-bottom').style.display = 'flex';
     document.getElementById('total-progress-text').textContent = '🎉 全部安装完成！';
     document.getElementById('total-progress-fill').style.width = '100%';
+    document.getElementById('log-section').style.display = 'block';
+  },
+
+  // === Page 5: Log Viewer ===
+  async viewLogs() {
+    this.show('page-logs');
+    const el = document.getElementById('log-output');
+    el.textContent = '加载中...';
+    try {
+      const logs = await window.api.readLogs(100);
+      el.textContent = logs.join('\n') || '(暂无日志)';
+    } catch (e) {
+      el.textContent = '加载日志失败: ' + e.message;
+    }
+  },
+
+  async refreshLogs() {
+    await this.viewLogs();
   }
 };
 
