@@ -1,0 +1,60 @@
+{
+  "version": "1.0",
+  "dependencies": {
+    "node": {
+      "name": "Node.js", "minVersion": "18.0.0",
+      "checkCmd": "node --version", "versionRegex": "v(\\d+\\.\\d+\\.\\d+)",
+      "mac": {
+        "url": "https://npmmirror.com/mirrors/node/v20.18.0/node-v20.18.0-arm64.pkg",
+        "fallbackUrl": "https://nodejs.org/dist/v20.18.0/node-v20.18.0-arm64.pkg",
+        "installCmd": "installer -pkg \"{file}\" -target /",
+        "sudo": true
+      },
+      "win": {
+        "url": "https://npmmirror.com/mirrors/node/v20.18.0/node-v20.18.0-x64.msi",
+        "fallbackUrl": "https://nodejs.org/dist/v20.18.0/node-v20.18.0-x64.msi",
+        "installCmd": "msiexec /i \"{file}\" /quiet /norestart"
+      }
+    },
+    "git": {
+      "name": "Git", "minVersion": "2.0.0",
+      "checkCmd": "git --version", "versionRegex": "(\\d+\\.\\d+\\.\\d+)",
+      "mac": { "brewCmd": "brew install git" },
+      "win": {
+        "url": "https://github.com/git-for-windows/git/releases/download/v2.45.1.windows.1/Git-2.45.1-64-bit.exe",
+        "installCmd": "\"{file}\" /VERYSILENT /NORESTART"
+      }
+    }
+  },
+  "categories": [
+    {
+      "id": "cli", "name": "📟 终端 CLI",
+      "products": [
+        {"id":"claude-code","name":"Claude Code","vendor":"Anthropic","description":"Anthropic 官方终端 AI Agent","mainCmd":"claude","installType":"npm","packageName":"@anthropic-ai/claude-code","requires":["node"],"platforms":["mac","win","linux"]},
+        {"id":"codex-cli","name":"Codex CLI","vendor":"OpenAI","description":"OpenAI 开源终端 AI 编程工具","mainCmd":"codex","installType":"npm","packageName":"@openai/codex","requires":["node"],"platforms":["mac","win","linux"]},
+        {"id":"opencode","name":"OpenCode","vendor":"SST","description":"开源编码 Agent，16万+ ⭐","mainCmd":"opencode","installType":"npm","packageName":"opencode-ai","requires":["node"],"platforms":["mac","win","linux"]},
+        {"id":"deepseek-tui","name":"DeepSeek TUI","vendor":"Hunter Bown","description":"DeepSeek 模型终端编程 Agent，33k+ ⭐","mainCmd":"deepseek","installType":"npm","packageName":"deepseek-tui","requires":["node"],"platforms":["mac","win","linux"]},
+        {"id":"kimi-code","name":"Kimi Code","vendor":"月之暗面","description":"Kimi 模型驱动的终端编程工具","mainCmd":"kimi","installType":"npm","packageName":"kimi-code","requires":["node"],"platforms":["mac","win","linux"]},
+        {"id":"qoder-cli","name":"Qoder CLI","vendor":"阿里云","description":"阿里云 AI 编程助手 CLI","mainCmd":"qodercli","installType":"npm","packageName":"@qoder-ai/qodercli","requires":["node"],"platforms":["mac","win","linux"]},
+        {"id":"openclaw","name":"OpenClaw","vendor":"开源社区","description":"个人 AI 助手，支持多平台消息","mainCmd":"openclaw","installType":"npm","packageName":"openclaw","requires":["node"],"platforms":["mac","win","linux"]},
+        {"id":"hermes-agent","name":"Hermes Agent","vendor":"Nous Research","description":"自学习 AI Agent","mainCmd":"hermes","installType":"script","installScript":"curl -fsSL https://raw.githubusercontent.com/NousResearch/hermes-agent/main/scripts/install.sh | bash","requires":[],"platforms":["mac","linux"]}
+      ]
+    },
+    {
+      "id": "editor", "name": "🖥️ AI 编辑器",
+      "products": [
+        {"id":"cursor","name":"Cursor","vendor":"Anysphere","description":"最流行的 AI 原生编辑器","installType":"download","downloadUrls":{"mac-arm64":"https://downloads.cursor.com/production/d5b2fc092e16007956c9e5047f76097b9e626cab/darwin/arm64/Cursor-darwin-arm64.dmg","mac-x64":"https://downloads.cursor.com/production/d5b2fc092e16007956c9e5047f76097b9e626cab/darwin/x64/Cursor-darwin-x64.dmg","win-x64":"https://downloads.cursor.com/production/d5b2fc092e16007956c9e5047f76097b9e626cab/win32/x64/CursorSetup.exe"},"requires":[],"platforms":["mac","win"]},
+        {"id":"windsurf","name":"Windsurf","vendor":"Codeium","description":"AI IDE，主打流式编辑体验","installType":"download","downloadUrl":"https://windsurf.com/api/download/darwin-arm64","websiteUrl":"https://windsurf.com/download","requires":[],"platforms":["mac","win","linux"]},
+        {"id":"trae","name":"Trae","vendor":"字节跳动","description":"字节跳动 AI 编程 IDE","installType":"download","downloadUrl":"https://www.trae.com.cn/api/download/darwin/arm64/stable","websiteUrl":"https://www.trae.com.cn/download","requires":[],"platforms":["mac","win"]},
+        {"id":"qoder-desktop","name":"Qoder 桌面版","vendor":"阿里云","description":"阿里云 AI 编程桌面 IDE","installType":"download","downloadUrl":"https://qoder.com/api/download/darwin-arm64","websiteUrl":"https://qoder.com/download","requires":[],"platforms":["mac","win","linux"]},
+        {"id":"vscode","name":"VS Code","vendor":"Microsoft","description":"全球最流行的免费代码编辑器","installType":"download","downloadUrls":{"mac-arm64":"https://code.visualstudio.com/sha/download?build=stable&os=darwin-arm64","mac-x64":"https://code.visualstudio.com/sha/download?build=stable&os=darwin-x64","win-x64":"https://code.visualstudio.com/sha/download?build=stable&os=win32-x64"},"requires":[],"platforms":["mac","win","linux"]}
+      ]
+    },
+    {
+      "id": "manager", "name": "🔄 管理工具",
+      "products": [
+        {"id":"cc-switch","name":"CC Switch","vendor":"开源社区","description":"AI 编程助手统一管理工具","installType":"download","downloadUrl":"https://github.com/checherish56/cc-switch-app/releases/latest","websiteUrl":"https://github.com/checherish56/cc-switch-app/releases","requires":[],"platforms":["mac","win","linux"]}
+      ]
+    }
+  ]
+}

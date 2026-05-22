@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI 工具安装助手</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <!-- Title Bar -->
+  <div class="title-bar">
+    <span class="title-text">🔧 AI 工具安装助手</span>
+    <div class="title-controls">
+      <button class="title-btn" onclick="window.api.minimizeWindow()">─</button>
+      <button class="title-btn close" onclick="window.api.closeWindow()">✕</button>
+    </div>
+  </div>
+
+  <!-- Page 1: Welcome -->
+  <div id="page-welcome" class="page active">
+    <div class="welcome-content">
+      <div class="welcome-icon">⚡</div>
+      <h1>AI 工具安装助手</h1>
+      <p class="welcome-desc">一键安装主流 AI 编程工具，自动检测环境、补齐依赖</p>
+      <div class="welcome-features">
+        <div class="feature-item">🔍 自动检测电脑环境</div>
+        <div class="feature-item">📦 自动补齐缺失依赖</div>
+        <div class="feature-item">🚀 一键安装选中工具</div>
+      </div>
+      <button class="btn-primary" onclick="app.goToSelect()">开始使用 →</button>
+    </div>
+  </div>
+
+  <!-- Page 2: Select Products -->
+  <div id="page-select" class="page">
+    <div class="page-header">
+      <button class="btn-back" onclick="app.goToWelcome()">← 返回</button>
+      <span class="page-step">第 1 步：选择工具</span>
+    </div>
+    <div class="select-content" id="product-list">
+      <!-- Rendered by JS -->
+    </div>
+    <div class="bottom-bar">
+      <span class="selected-count" id="selected-count">已选 0 项</span>
+      <button class="btn-primary" id="btn-detect" onclick="app.goToDetect()" disabled>检测环境 →</button>
+    </div>
+  </div>
+
+  <!-- Page 3: Detect Result -->
+  <div id="page-detect" class="page">
+    <div class="page-header">
+      <button class="btn-back" onclick="app.goToSelect()">← 返回</button>
+      <span class="page-step">第 2 步：环境检测</span>
+    </div>
+    <div class="detect-content" id="detect-result">
+      <div class="loading-spinner">⏳ 检测中...</div>
+    </div>
+    <div class="bottom-bar">
+      <span id="detect-summary"></span>
+      <button class="btn-primary" id="btn-install" onclick="app.startInstall()" disabled>开始安装 →</button>
+    </div>
+  </div>
+
+  <!-- Page 4: Install Progress -->
+  <div id="page-install" class="page">
+    <div class="page-header">
+      <span class="page-step">安装进度</span>
+    </div>
+    <div class="install-content" id="install-progress">
+      <div class="total-progress-bar"><div class="total-progress-fill" id="total-progress-fill"></div></div>
+      <div class="total-progress-text" id="total-progress-text">准备安装...</div>
+      <div id="install-items"></div>
+    </div>
+    <div class="bottom-bar" id="install-bottom" style="display:none">
+      <button class="btn-primary" onclick="app.goToWelcome()">完成</button>
+    </div>
+  </div>
+
+  <script src="js/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,59 @@
+{
+  "name": "ai-installer",
+  "version": "1.0.0",
+  "description": "AI 工具安装助手 — 一键安装主流 AI 编程工具",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "build:mac": "electron-builder --mac --arm64",
+    "build:win": "electron-builder --win --x64"
+  },
+  "build": {
+    "appId": "com.ai-installer",
+    "productName": "AI工具安装助手",
+    "directories": {
+      "output": "dist"
+    },
+    "mac": {
+      "target": [
+        "dmg"
+      ],
+      "artifactName": "AI-Installer-${version}-mac-${arch}.${ext}",
+      "identity": null
+    },
+    "win": {
+      "target": [
+        "nsis"
+      ],
+      "artifactName": "AI-Installer-${version}-win-x64.${ext}"
+    },
+    "linux": {
+      "target": [
+        "AppImage"
+      ],
+      "artifactName": "AI-Installer-${version}-linux-x64.${ext}"
+    },
+    "files": [
+      "main.js",
+      "preload.js",
+      "renderer/**/*",
+      "modules/**/*",
+      "products.json",
+      "package.json"
+    ],
+    "extraMetadata": {
+      "main": "main.js"
+    }
+  },
+  "keywords": [
+    "AI",
+    "installer",
+    "developer-tools"
+  ],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "electron": "^42.2.0",
+    "electron-builder": "^26.8.1"
+  }
+}
