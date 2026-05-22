@@ -130,10 +130,13 @@
 - **macOS**: 12.0+（Apple Silicon 或 Intel）
 - **Windows**: Windows 10+（x64）
 
-### 下载
-从 [Releases 页面](https://github.com/questionjie-max/ai-installer/releases) 下载最新版本。
+### macOS 用户
+项目根目录的 **`AI-Installer.app`** 双击即可运行。
 
-### 或者从源码运行
+### Windows 用户
+双击项目文件夹里的 **`start.bat`**，脚本会自动安装依赖并启动。
+
+或者在终端手动运行：
 ```bash
 git clone https://github.com/questionjie-max/ai-installer.git
 cd ai-installer
