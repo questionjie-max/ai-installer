@@ -1,56 +1,82 @@
 <div align="center">
   <h1>🔧 AI 工具安装助手</h1>
-  <p><strong>一键安装主流 AI 编程工具，自动检测环境、补齐依赖，装完直接用。</strong></p>
+  <h3>AI 编程工具一键安装器</h3>
   <p>
-    <a href="README.md">English</a> ·
-    <a href="https://github.com/questionjie-max/ai-installer/releases">下载</a> ·
-    <a href="#-支持的产品">产品列表</a> ·
-    <a href="#-快速开始">快速开始</a>
+    <em>自动检测环境 · 自动补齐依赖 · 一键安装<br>
+    支持 Claude Code、Codex CLI、Cursor、DeepSeek TUI、Windsurf、Trae 等 14 款 AI 编程工具</em>
   </p>
   <p>
-    <img src="docs/screenshots/welcome.png" width="320" alt="欢迎页">
-    <img src="docs/screenshots/select-products.png" width="320" alt="选择产品">
-    <img src="docs/screenshots/detect-result.png" width="320" alt="环境检测">
+    <a href="README.md"><img src="https://img.shields.io/badge/English-Readme-blue?style=flat-square" alt="English"></a>
+    <a href="https://github.com/questionjie-max/ai-installer/releases"><img src="https://img.shields.io/github/v/release/questionjie-max/ai-installer?style=flat-square" alt="下载"></a>
+    <a href="LICENSE"><img src="https://img.shields.io/github/license/questionjie-max/ai-installer?style=flat-square" alt="许可证"></a>
+  </p>
+  <p>
+    <img src="docs/screenshots/welcome.png" width="280" alt="欢迎页">
+    <img src="docs/screenshots/select-products.png" width="280" alt="选择产品">
+    <img src="docs/screenshots/detect-result.png" width="280" alt="环境检测">
   </p>
 </div>
 
 ---
 
-## ✨ 功能特点
+## 📖 简介
 
-- **🖥️ 桌面图形界面** — 不用敲命令行，点点鼠标就能装
-- **🔍 自动环境检测** — 自动检测 Node.js、Git、Python 和网络状态
-- **⚡ 智能镜像切换** — 检测到海外源慢时自动切到国内淘宝镜像，无需 VPN
-- **📦 一键安装** — 选工具 → 检测环境 → 安装，一气呵成
-- **🔗 装完直接用** — 装完后命令自动链接到 `~/.local/bin`，终端直接就能用
-- **🌐 跨平台** — 支持 macOS (dmg/zip) 和 Windows (exe)
+**AI 工具安装助手** 是一个桌面图形界面工具，帮助开发者快速配置 AI 编程环境。不用一个个去官网下载、不用敲一堆 `npm install` 命令、不用手动配 PATH——勾选你要的工具，点一下安装就行了。
+
+### 为什么需要这个工具
+
+安装 AI 编程工具（如 Claude Code、Cursor、DeepSeek TUI）通常需要：
+1. 安装 Node.js（选版本、配 PATH）
+2. 安装 Git
+3. 跑 `npm install -g` 
+4. 手动把命令链接到 PATH
+5. 每个工具重复一遍
+
+这个安装器把整个过程自动化了，从环境检测到安装一步到位，特别针对中国大陆用户做了镜像加速优化。
 
 ---
 
-## 📋 支持的产品
+## ✨ 功能特点
 
-### 📟 终端 CLI（8款）
-| 产品 | 厂商 | 安装方式 |
+| 功能 | 说明 |
+|------|------|
+| **🖥️ 桌面图形界面** | 不用敲命令行，点点鼠标就能装 |
+| **🔍 自动环境检测** | 自动检查 Node.js、Git、Python 版本和网络状态 |
+| **⚡ 智能镜像切换** | 海外源慢时自动切到淘宝 npmmirror.com 镜像，无需 VPN |
+| **📦 一键安装** | 选多个工具 → 检测环境 → 一键安装，全流程自动化 |
+| **🔗 装完直接用** | CLI 命令自动链接到 `~/.local/bin`，终端直接能用 |
+| **🌐 跨平台** | 支持 macOS（Apple Silicon + Intel）和 Windows |
+
+---
+
+## 📦 支持的产品（14 款）
+
+### 📟 终端 CLI / AI Agent
+在终端里直接运行，适合自动化操作的 AI 编程工具。
+
+| 产品 | 厂商 | 安装方式 | ⭐ |
+|------|------|---------|:--:|
+| [Claude Code](https://docs.anthropic.com/zh-CN/docs/claude-code/overview) | Anthropic | `npm i -g @anthropic-ai/claude-code` | — |
+| [Codex CLI](https://github.com/openai/codex) | OpenAI | `npm i -g @openai/codex` | — |
+| [OpenCode](https://github.com/sst/opencode) | SST / anomalyco | `npm i -g opencode-ai` | 163k |
+| [DeepSeek TUI](https://github.com/Hmbown/DeepSeek-TUI) | Hunter Bown | `npm i -g deepseek-tui` | 33k |
+| [Kimi Code](https://www.npmjs.com/package/kimi-code) | 月之暗面 | `npm i -g kimi-code` | — |
+| [Qoder CLI](https://qoder.com) | 阿里云 | `npm i -g @qoder-ai/qodercli` | — |
+| [OpenClaw](https://github.com/openclaw/openclaw) | 开源社区 | `npm i -g openclaw` | — |
+| [Hermes Agent](https://github.com/NousResearch/hermes-agent) | Nous Research | 安装脚本 | — |
+
+### 🖥️ AI 编辑器
+内置 AI 功能的桌面编辑器。
+
+| 产品 | 厂商 | 支持平台 |
 |------|------|---------|
-| [Claude Code](https://docs.anthropic.com/zh-CN/docs/claude-code/overview) | Anthropic | `npm i -g @anthropic-ai/claude-code` |
-| [Codex CLI](https://github.com/openai/codex) | OpenAI | `npm i -g @openai/codex` |
-| [OpenCode](https://github.com/sst/opencode) | SST (anomalyco) | `npm i -g opencode-ai` |
-| [DeepSeek TUI](https://github.com/Hmbown/DeepSeek-TUI) | Hunter Bown | `npm i -g deepseek-tui` |
-| [Kimi Code](https://www.npmjs.com/package/kimi-code) | 月之暗面 | `npm i -g kimi-code` |
-| [Qoder CLI](https://qoder.com) | 阿里云 | `npm i -g @qoder-ai/qodercli` |
-| [OpenClaw](https://github.com/openclaw/openclaw) | 开源社区 | `npm i -g openclaw` |
-| [Hermes Agent](https://github.com/NousResearch/hermes-agent) | Nous Research | 安装脚本 |
+| [Cursor](https://cursor.com) | Anysphere | macOS, Windows |
+| [Windsurf](https://windsurf.com) | Codeium | macOS, Windows, Linux |
+| [Trae](https://www.trae.com.cn) | 字节跳动 | macOS, Windows |
+| [Qoder 桌面版](https://qoder.com) | 阿里云 | macOS, Windows, Linux |
+| [VS Code](https://code.visualstudio.com) | 微软 | macOS, Windows, Linux |
 
-### 🖥️ AI 编辑器（5款）
-| 产品 | 厂商 | 安装方式 |
-|------|------|---------|
-| [Cursor](https://cursor.com) | Anysphere | 下载 DMG/EXE |
-| [Windsurf](https://windsurf.com) | Codeium | 下载 DMG/EXE |
-| [Trae](https://www.trae.com.cn) | 字节跳动 | 下载 DMG/EXE |
-| [Qoder 桌面版](https://qoder.com) | 阿里云 | 下载 DMG/EXE |
-| [VS Code](https://code.visualstudio.com) | 微软 | 下载 DMG/EXE |
-
-### 🔄 管理工具（1款）
+### 🔄 管理工具
 | 产品 | 厂商 | 说明 |
 |------|------|------|
 | [CC Switch](https://github.com/checherish56/cc-switch-app) | 开源社区 | AI 编程助手统一管理切换工具 |
@@ -59,12 +85,14 @@
 
 ## 🚀 快速开始
 
-### 下载安装包
+### 系统要求
+- **macOS**: 12.0+（Apple Silicon 或 Intel）
+- **Windows**: Windows 10+（x64）
+
+### 下载
 从 [Releases 页面](https://github.com/questionjie-max/ai-installer/releases) 下载最新版本。
 
-对于中国大陆用户，如果下载慢可以通过网盘或 NAS 获取离线包。
-
-### 从源码运行
+### 或者从源码运行
 ```bash
 git clone https://github.com/questionjie-max/ai-installer.git
 cd ai-installer
@@ -73,46 +101,21 @@ npm start
 ```
 
 ### 使用流程
-1. **打开应用** — 看到欢迎页
-2. **选择工具** — 勾选你想装的 AI 工具
-3. **检测环境** — 自动检测 Node.js、Git 是否已安装
-4. **一键安装** — 点击"开始安装"，自动补齐缺失依赖并安装选中工具
-5. **完成** — CLI 工具装完直接在终端使用
+```
+打开应用 → 勾选工具 → 检测环境 → 一键安装 → ✅ 完成
+```
 
 ---
 
-## 🖥️ 打包构建
+## 🌏 网络优化
 
-```bash
-# macOS
-npm run build:mac
+**中国大陆用户**无需配置 VPN：
 
-# Windows（macOS 上需要装 Wine）
-npm run build:win
-```
+- 能直连海外 → 走官方源（`registry.npmjs.org`）
+- 海外源慢或连不上 → 自动切到淘宝镜像（`npmmirror.com`）
 
-打包产物在 `dist/` 目录。
-
----
-
-## 🧩 项目结构
-
-```
-ai-installer/
-├── main.js              # Electron 主进程
-├── preload.js           # 安全桥接
-├── products.json        # 14 款产品配置
-├── modules/
-│   ├── products.js      # 产品配置加载
-│   ├── detector.js      # 环境检测模块
-│   └── installer.js     # 安装引擎
-├── renderer/
-│   ├── index.html       # UI 页面
-│   ├── css/style.css    # 深色主题样式
-│   └── js/app.js        # 前端逻辑
-├── docs/                # 文档和截图
-└── package.json
-```
+### 离线安装
+把安装包提前下载好放到 `cache/` 目录，安装器会优先使用本地缓存。
 
 ---
 
@@ -124,4 +127,16 @@ MIT
 
 ## 🤝 贡献
 
-找到 Bug 了？想加新工具？欢迎提 [Issue](https://github.com/questionjie-max/ai-installer/issues) 或 PR！
+欢迎贡献！加新工具、改界面、修 Bug 都可以：
+
+1. 先提 [Issue](https://github.com/questionjie-max/ai-installer/issues) 讨论
+2. 提交 [Pull Request](https://github.com/questionjie-max/ai-installer/pulls)
+3. 点个 ⭐ 让更多人看到
+
+---
+
+<div align="center">
+  <sub>为不想折腾环境的开发者而生</sub>
+  <br>
+  <sub>❤️ 开源社区作品</sub>
+</div>
