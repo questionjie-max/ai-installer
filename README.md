@@ -1,5 +1,5 @@
 <div align="center">
-  <h1>🔧 AI Tool Installer</h1>
+  <h1>🔧 AI Tool Installer <sub>· AI 工具安装助手</sub></h1>
   <h3>One-Click Installer for AI Coding Tools</h3>
   <p>
     <em>Automatic environment detection · Dependency management · One-click installation<br>
@@ -11,12 +11,38 @@
     <a href="https://github.com/questionjie-max/ai-installer/blob/main/LICENSE"><img src="https://img.shields.io/github/license/questionjie-max/ai-installer?style=flat-square" alt="License"></a>
     <a href="https://github.com/questionjie-max/ai-installer/issues"><img src="https://img.shields.io/github/issues/questionjie-max/ai-installer?style=flat-square" alt="Issues"></a>
   </p>
-  <p>
-    <img src="docs/screenshots/ss-welcome.png" width="280" alt="Welcome Screen">
-    <img src="docs/screenshots/ss-select.png" width="280" alt="Product Selection">
-    <img src="docs/screenshots/ss-detect.png" width="225" alt="Environment Detection">
-    <img src="docs/screenshots/ss-install.png" width="225" alt="Installation">
-  </p>
+  <!-- Screenshot Gallery: 2x2 Grid -->
+  <p><strong>How it works — 4 simple steps</strong></p>
+</div>
+
+<table align="center">
+<tr>
+  <td align="center" width="280">
+    <strong>① Welcome</strong><br>
+    <img src="docs/screenshots/ss-welcome.png" width="260" alt="Welcome Screen"><br>
+    <em>Launch the installer</em>
+  </td>
+  <td align="center" width="280">
+    <strong>② Select Tools</strong><br>
+    <img src="docs/screenshots/ss-select.png" width="260" alt="Product Selection"><br>
+    <em>Choose AI coding tools</em>
+  </td>
+</tr>
+<tr>
+  <td align="center" width="280">
+    <strong>③ Detect Environment</strong><br>
+    <img src="docs/screenshots/ss-detect.png" width="260" alt="Environment Detection"><br>
+    <em>Auto-check Node, Git & network</em>
+  </td>
+  <td align="center" width="280">
+    <strong>④ Install</strong><br>
+    <img src="docs/screenshots/ss-install.png" width="260" alt="Installation"><br>
+    <em>One-click install, ready to use</em>
+  </td>
+</tr>
+</table>
+
+<div align="center">
 </div>
 
 ---

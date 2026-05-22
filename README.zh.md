@@ -1,5 +1,5 @@
 <div align="center">
-  <h1>🔧 AI 工具安装助手</h1>
+  <h1>🔧 AI 工具安装助手 <sub>· AI Tool Installer</sub></h1>
   <h3>AI 编程工具一键安装器</h3>
   <p>
     <em>自动检测环境 · 自动补齐依赖 · 一键安装<br>
@@ -10,12 +10,38 @@
     <a href="https://github.com/questionjie-max/ai-installer/releases"><img src="https://img.shields.io/github/v/release/questionjie-max/ai-installer?style=flat-square" alt="下载"></a>
     <a href="LICENSE"><img src="https://img.shields.io/github/license/questionjie-max/ai-installer?style=flat-square" alt="许可证"></a>
   </p>
-  <p>
-    <img src="docs/screenshots/ss-welcome.png" width="280" alt="欢迎页">
-    <img src="docs/screenshots/ss-select.png" width="280" alt="选择产品">
-    <img src="docs/screenshots/ss-detect.png" width="225" alt="环境检测">
-    <img src="docs/screenshots/ss-install.png" width="225" alt="安装中">
-  </p>
+  <!-- 截图展示：2×2 网格 -->
+  <p><strong>使用流程 — 4 步搞定</strong></p>
+</div>
+
+<table align="center">
+<tr>
+  <td align="center" width="280">
+    <strong>① 欢迎页</strong><br>
+    <img src="docs/screenshots/ss-welcome.png" width="260" alt="欢迎页"><br>
+    <em>打开安装器</em>
+  </td>
+  <td align="center" width="280">
+    <strong>② 选择产品</strong><br>
+    <img src="docs/screenshots/ss-select.png" width="260" alt="选择产品"><br>
+    <em>勾选要安装的工具</em>
+  </td>
+</tr>
+<tr>
+  <td align="center" width="280">
+    <strong>③ 环境检测</strong><br>
+    <img src="docs/screenshots/ss-detect.png" width="260" alt="环境检测"><br>
+    <em>自动检查 Node、Git 和网络</em>
+  </td>
+  <td align="center" width="280">
+    <strong>④ 安装</strong><br>
+    <img src="docs/screenshots/ss-install.png" width="260" alt="安装中"><br>
+    <em>一键安装，装完直接用</em>
+  </td>
+</tr>
+</table>
+
+<div align="center">
 </div>
 
 ---
